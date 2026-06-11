@@ -1,10 +1,16 @@
 -- ANOMALY ALERT SYSTEM SERVER
 
 network = peripheral.find("modem", rednet.open)
+version = "1.1"
 
-function send_alert()
-    print("Alert System Activated...")
-    rednet.broadcast("ANOMALY DETECTED", "anom")
+function crit_alert()
+    print("Broadcasting Critical Alert...")
+    rednet.broadcast("critalert", "anom")
+end
+
+function yellow_alert()
+    print("Broadcasting Yellow Alert...")
+    rednet.broadcast("yellowalert", "anom")
 end
 
 function debug_alert()
@@ -14,17 +20,14 @@ function debug_alert()
     send_alert()
 end
 
--- NIGHTTIME ALERT
-while true do
-    time = os.time("ingame")
-    print("The time is:", time)
-    sleep(1)
-    shell.run("clear")
-
-    if time >= 18.000 and time <= 18.050 then
-        send_alert()
-    end
+function update_server()
+    print("NETWORKED SYSTEM UPDATE INITIATED.")
+    shell.run("anom_updater")
 end
+
+-- MAIN PROGRAM
+print("ANOMALY ALERT SYSTEM")
+print("Software Version:", version)
 
 
 
