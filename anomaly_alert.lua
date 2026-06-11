@@ -23,10 +23,8 @@ function yellow_alert()
 end
 
 function update_client()
-    print("REMOTE UPDATE....")
-    shell.run("wget https://raw.githubusercontent.com/nexus331/CCNexus-Projects/refs/heads/main/anomaly_alert.lua")
-    sleep(3)
-    shell.run("reboot")
+    print("NETWORKED SYSTEM UPDATE INITIATED.")
+    shell.run("anom_updater")
 end
 
 function wait_command()

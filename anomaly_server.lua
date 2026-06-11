@@ -29,5 +29,17 @@ end
 print("ANOMALY ALERT SYSTEM")
 print("Software Version:", version)
 
+while true do
+    id, message, protocol = rednet.receive("anom")
+    print("DEBUG:", message)
+    if message == "server_critical" then
+        crit_alert()
+    elseif message == "server_yellow" then
+        yellow_alert()
+    elseif message == "update_anom" then
+        update_server()
+    end
+end
+
 
 
