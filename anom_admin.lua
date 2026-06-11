@@ -57,6 +57,7 @@ io.write("Enter Administrator Password:")
 auth_user = io.read()
 
 if auth_user == password then
+    shell.run("clear")
     main_menu()
 else
     print("Invalid Password!")
