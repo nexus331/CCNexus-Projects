@@ -2,7 +2,7 @@
 
 -- VARIABLES
 network = peripheral.find("modem", rednet.open)
-version = "1.1"
+version = "1.2"
 redstone_out = "bottom"
 redstone_out2 = "top"
 redstone_out3 = "right"
@@ -27,6 +27,13 @@ function update_client()
     shell.run("anom_updater")
 end
 
+function door_test()
+    rednet.broadcast("AUTOMATED DOORS ACTIVATED", "anom")
+    redstone.setOutput(redstone_out3, true)
+    sleep(10)
+    redstone.setOutput(redstone_out3, false)
+end
+
 function wait_command()
     id, message, protocol = rednet.receive("anom")
     print("RECIEVED FROM COMPUTER:", id, message)
@@ -36,6 +43,8 @@ function wait_command()
         yellow_alert()
     elseif message == "update_anom" then
         update_client()
+    elseif message == "testdoors" then
+        door_test()
     end
 end
 

@@ -1,7 +1,7 @@
 -- ANOMALY ALERT SYSTEM SERVER
 
 network = peripheral.find("modem", rednet.open)
-version = "1.1"
+version = "1.2"
 
 function crit_alert()
     print("Broadcasting Critical Alert...")
@@ -17,7 +17,12 @@ function debug_alert()
     print("DEBUG MODE:")
     sleep(1)
     print("Broadcasting Alert Signal...")
-    send_alert()
+    crit_alert()
+end
+
+function door_test()
+    print("Initiating Automated Doors Test...")
+    rednet.broadcast("testdoors", "anom")
 end
 
 function update_server()
@@ -36,6 +41,8 @@ while true do
         crit_alert()
     elseif message == "server_yellow" then
         yellow_alert()
+    elseif message == "server_door" then
+        door_test()
     elseif message == "update_anom" then
         update_server()
     end
